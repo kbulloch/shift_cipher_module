@@ -24,7 +24,7 @@ function shift_cipher_form() {
         '#description' => t('Enter the number of letters to shift by'),
         '#element_validate' => array(
             'element_validate_integer_positive',
-            'element_validate_within_26'),
+            'element_validate_within_25'),
         );
     $form['direction'] = array(
         '#title' => 'Shift Direction',
@@ -47,9 +47,9 @@ function shift_cipher_form() {
     return $form;
 }
 
-function element_validate_within_26($element) {
-    if($element['#value'] > 26 || $element['#value'] < 0) {
-        form_error($element, t('Shift magnitude must be between 0 and 26'));
+function element_validate_within_25($element) {
+    if($element['#value'] > 25 || $element['#value'] < 1) {
+        form_error($element, t('Shift magnitude must be between 1 and 25'));
     }
 }
 
