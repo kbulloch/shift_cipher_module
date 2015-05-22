@@ -99,5 +99,5 @@ function shift_cipher_form_submit($form, &$form_state) {
 }
 
 function shift_cipher_output() {
-    return '<p>Shift cipher output: ' . $_SESSION['encrypted_phrase'] . '</p>';
+    return '<p>' . $_SESSION['encrypted_phrase'] . '</p>';
 }
