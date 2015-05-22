@@ -30,7 +30,6 @@ function shift_cipher_form() {
             'left' => t('left'),
             'right' => t('right'),
         ),
-        '#description' => t('Enter the direction to shift: left or right'),
     );
     $form['phrase'] = array(
         '#title' => 'Input Phrase',
@@ -45,9 +44,15 @@ function shift_cipher_form() {
 }
 
 function shift_cipher_form_submit($form, &$form_state) {
+    $magnitude = $form_state['values']['magnitude'];
+    $direction = $form_state['values']['direction'];
+    $input_phrase = $form_state['values']['phrase'];
+
+
+    $_SESSION['encrypted_phrase'] = $input_phrase;
     $form_state['redirect'] = 'cipher_output';
 }
 
 function shift_cipher_output() {
-    return '<p>Shift cipher output page</p>';
+    return '<p>Shift cipher output:' . $_SESSION['encrypted_phrase'] . '</p>';
 }
