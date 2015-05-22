@@ -1,5 +1,6 @@
 <?php
 
+//create main menu item
 function shift_cipher_menu() {
     $items['cipher'] = array(
         'title' => 'Shift Cipher Encryption',
@@ -17,6 +18,7 @@ function shift_cipher_menu() {
     return $items;
 }
 
+//create cipher input form
 function shift_cipher_form() {
     $form['magnitude'] = array(
         '#title' => 'Shift Magnitude',
@@ -47,6 +49,8 @@ function shift_cipher_form() {
     return $form;
 }
 
+//validation that makes sure magnitude is within 1 to 25
+//shift of 26 would result in unencrypted phrase
 function element_validate_within_25($element) {
     if($element['#value'] > 25 || $element['#value'] < 1) {
         form_error($element, t('Shift magnitude must be between 1 and 25'));
@@ -58,23 +62,34 @@ function shift_cipher_form_submit($form, &$form_state) {
     $direction = $form_state['values']['direction'];
     $input_phrase = $form_state['values']['phrase'];
 
+    //changes negative magnitude to equivalent shift in positive number
     if($direction == 'left') {
         $magnitude = 26 - $magnitude;
     }
 
+    //splits input phrase string into array of characters
+    //makes all characters lowercase
     $phrase = str_split(strtolower($input_phrase));
 
+    //array of the alphabet
     $alphabet = range('a', 'z');
 
+    //initial empty string for output
     $output_phrase = '';
 
+    //loop through each letter in user's input phrase
     foreach($phrase as $element) {
+        //check that it is a letter, ignores punctuation and spaces etc
         if(in_array($element, $alphabet)) {
+            //find index of letter
             $index_of_letter = array_search($element, $alphabet);
+            //calculate index of encrypted letter
             $encrypted_letter_index = ($index_of_letter + $magnitude) % 26;
+            //push encrypted letter to output string
             $output_phrase .= $alphabet[$encrypted_letter_index];
         }
         else {
+            //push non-letter characters to output string unchanged
             $output_phrase .= $element;
         }
     }
