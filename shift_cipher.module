@@ -41,6 +41,7 @@ function shift_cipher_form() {
         '#title' => 'Input Phrase',
         '#type' => 'textfield',
         '#description' => t('Enter the phrase to encrypt'),
+        '#element_validate' => array('element_validate_no_special_characters'),
     );
     $form['submit'] = array(
         '#type' => 'submit',
@@ -54,6 +55,12 @@ function shift_cipher_form() {
 function element_validate_within_25($element) {
     if($element['#value'] > 25 || $element['#value'] < 1) {
         form_error($element, t('Shift magnitude must be between 1 and 25'));
+    }
+}
+
+function element_validate_no_special_characters($element) {
+    if(preg_match('/[^a-zA-z.!?]+/', $element)) {
+        form_error($element, t('Phrase cannot contain special characters'));
     }
 }
 
