@@ -29,6 +29,7 @@ function shift_cipher_form() {
     $form['direction'] = array(
         '#title' => 'Shift Direction',
         '#type' => 'radios',
+        '#default_value' => 'right',
         '#options' => array(
             'left' => t('left'),
             'right' => t('right'),
