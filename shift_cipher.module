@@ -22,8 +22,10 @@ function shift_cipher_form() {
         '#title' => 'Shift Magnitude',
         '#type' => 'textfield',
         '#description' => t('Enter the number of letters to shift by'),
-        '#element_validate' => array('element_validate_within_26'),
-    );
+        '#element_validate' => array(
+            'element_validate_integer_positive',
+            'element_validate_within_26'),
+        );
     $form['direction'] = array(
         '#title' => 'Shift Direction',
         '#type' => 'radios',
