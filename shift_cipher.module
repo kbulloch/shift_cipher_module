@@ -48,11 +48,28 @@ function shift_cipher_form_submit($form, &$form_state) {
     $direction = $form_state['values']['direction'];
     $input_phrase = $form_state['values']['phrase'];
 
+    $phrase = strtoupper($input_phrase);
 
-    $_SESSION['encrypted_phrase'] = $input_phrase;
+    $alphabet = array('A','B','C','D','E','F','G','H',
+        'I','J','K','L','M','N','O','P','Q','R','S',
+        'T','U','V','W','X','Y','Z');
+
+    $output_phrase = '';
+
+    foreach($phrase as $element) {
+        if(in_array($element, $alphabet)) {
+            $index_of_letter = array_search($element, $alphabet);
+            $output_phrase .= $alphabet[$index_of_letter + $magnitude];
+        }
+        else {
+            $output_phrase .= $element;
+        }
+    }
+
+    $_SESSION['encrypted_phrase'] = $output_phrase;
     $form_state['redirect'] = 'cipher_output';
 }
 
 function shift_cipher_output() {
-    return '<p>Shift cipher output:' . $_SESSION['encrypted_phrase'] . '</p>';
+    return '<p>Shift cipher output: ' . $_SESSION['encrypted_phrase'] . '</p>';
 }
