@@ -25,7 +25,11 @@ function shift_cipher_form() {
     );
     $form['direction'] = array(
         '#title' => 'Shift Direction',
-        '#type' => 'textfield',
+        '#type' => 'radios',
+        '#options' => array(
+            'left' => t('left'),
+            'right' => t('right'),
+        ),
         '#description' => t('Enter the direction to shift: left or right'),
     );
     $form['phrase'] = array(
