@@ -57,7 +57,8 @@ function shift_cipher_form_submit($form, &$form_state) {
     foreach($phrase as $element) {
         if(in_array($element, $alphabet)) {
             $index_of_letter = array_search($element, $alphabet);
-            $output_phrase .= $alphabet[$index_of_letter + $magnitude];
+            $encrypted_letter_index = ($index_of_letter + $magnitude) % 26;
+            $output_phrase .= $alphabet[$encrypted_letter_index];
         }
         else {
             $output_phrase .= $element;
