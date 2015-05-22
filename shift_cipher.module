@@ -48,6 +48,10 @@ function shift_cipher_form_submit($form, &$form_state) {
     $direction = $form_state['values']['direction'];
     $input_phrase = $form_state['values']['phrase'];
 
+    if($direction == 'left') {
+        $magnitude = -$magnitude;
+    }
+
     $phrase = str_split(strtolower($input_phrase));
 
     $alphabet = range('a', 'z');
