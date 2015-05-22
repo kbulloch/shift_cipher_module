@@ -59,7 +59,7 @@ function element_validate_within_25($element) {
 }
 
 function element_validate_no_special_characters($element) {
-    if(preg_match('/[^a-zA-z.!?]+/', $element['#value'])) {
+    if(preg_match('/[^a-zA-z.!? ]+/', $element['#value'])) {
         form_error($element, t('Phrase cannot contain special characters'));
     }
 }
